@@ -39,12 +39,14 @@ Estos seguiran el siguiente formato: "TMP-Recurso-Versión".
 
 ### Integrantes
 A continuación se detalla la lista de integrantes del grupo. Los roles que desempeñaran los mismos a lo largo del proyecto y actividades se detallan en un archivo llamado EstructuraEquipo, cuyo fin es demostrar los diferentes roles por los que pasará cada integrante.
-- Barbera, Juan Salvador   <> 86657
-- Dinia, Jorge Hassan      <> 87423
-- Iril, Rocco Maciel       <> 90104
-- Lima, Nicolás            <> 85569
-- Ramonda, Joaquín Antonio <> 82836
-- Zabala, Federica Emilia  <> 82830
+| Integrante                     | Legajo |
+|--------------------------------|--------|
+| Barbera, Juan Salvador         | 86657  |
+| Dinia, Jorge Hassan            | 87423  |
+| Iril, Rocco Maciel             | 90104  |
+| Lima, Nicolás                  | 85569  |
+| Ramonda, Joaquín Antonio       | 82836  |
+| Zabala, Federica Emilia        | 82830  |
 
 ### Estructura Repositoro
 
