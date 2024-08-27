@@ -16,7 +16,7 @@ Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizaje
 La línea base inicial del proyecto se define una vez el documento que específica la utilización del repositorio y su estructura se encuentra completo y consensuado por los miembros del equipo, con el objetivo de usarlo como herramienta que dará soporte al desarrollo de la materia.
 La linea base será actualizada cada vez que se tengan los items de configuración necesarios para realizar una entrega de trabajo práctico, no sin antes haber sido debatido por los integrantes del grupo de trabajo. Si se realizan correcciones al trabajo realizado post-entrega, también se modificará la línea base para reflejar los cambios realizados, tener la versión más estable y completa de los items de configuración.
 
-### Reglas de nombrado
+### ReglasNombrado
 En reglas generales, siempre se usará PascalCase para nombrar tanto los directorios como ítems de configuración. De manera particular se exigirá la cumplimentación de las siguientes reglas:
 
 #### Commits
@@ -48,6 +48,16 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
 | Ramonda, Joaquín Antonio       | 82836  |
 | Zabala, Federica Emilia        | 82830  |
 
-### Estructura Repositoro
+### EstructuraDelRepositorio
+DocumentosCursada/
+  └──  Apuntes/ 
+  └──  Resumenes/
+  └──  IndiceAportes
+Templates/
+TrabajosPracticos/ 
+EstructuraEquipo.docx 
+Glosario.docx 
+IndiceMinutas.docx 
+README.md
 
 
