@@ -49,6 +49,5 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
 | Zabala, Federica Emilia        | 82830  |
 
 ### EstructuraDelRepositorio
-DocumentosCursada/ │ ├── Templates/ ├── TrabajosPracticos/ │ ├── EstructuraEquipo.docx ├── Glosario.docx ├── IndiceMinutas.docx └── README.md
-
+![EstructuraDelRepositorio](https://github.com/user-attachments/assets/02dc71b9-9f90-48ce-b66c-52123f910277)
 
