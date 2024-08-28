@@ -26,6 +26,7 @@ Los commits seguirán el formato "Prefijo1/Prefijo2/PrefijoN-DescripciónAcción
 - El prefijo hace referencia a las siguientes posibles acciones que se pueden realizar con respecto a items de configuración
   - Add: Agregar un nuevo item de configuración.
   - Bugfix: Corregir un error descubierto dentro de un item de configuración que contenga código.
+  - Fix: Correción de errores de cualquier tipo dentro de un item de configuración.
   - Change: Cambio parcial de un item de configuración ya creado debido a modificaciones de criterio, requerimientos o correcciones.
   - Feature: Agregar una nueva funcionaliad dentro de un item de configuración que contenga código.
   - Remove: Eliminación completa de algún item de configuración si el mismo se encontraba mal planteado.
