@@ -8,18 +8,20 @@ Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizaje
 - [Integrantes](#Integrantes)
 - [Estructura del repositorio](#EstructuraDelRepositorio)
 
-### Instalación
-1. git clone https://github.com/Salvita4/ISW-GrupoX-2024.git
-2. cd ISW-GrupoX-2024
+## Instalación
+```bash
+git clone https://github.com/Salvita4/ISW-GrupoX-2024.git
+cd ISW-GrupoX-2024
+```
 
-### CriterioLineaBase
+## CriterioLineaBase
 La línea base inicial del proyecto se define una vez el documento que específica la utilización del repositorio y su estructura se encuentra completo y consensuado por los miembros del equipo, con el objetivo de usarlo como herramienta que dará soporte al desarrollo de la materia.
 La linea base será actualizada cada vez que se tengan los items de configuración necesarios para realizar una entrega de trabajo práctico, no sin antes haber sido debatido por los integrantes del grupo de trabajo. Si se realizan correcciones al trabajo realizado post-entrega, también se modificará la línea base para reflejar los cambios realizados, y para tener la versión más estable y completa de los items de configuración.
 
-### ReglasNombrado
+## ReglasNombrado
 En reglas generales, siempre se usará PascalCase para nombrar tanto los directorios como ítems de configuración. De manera particular se exigirá la cumplimentación de las siguientes reglas:
 
-#### Commits
+### Commits
 Los commits seguirán el formato "Prefijo1/Prefijo2/PrefijoN-DescripciónAcción1/DescripciónAcción2/DescripciónAcciónN"
 - El prefijo hace referencia a las siguientes posibles acciones que se pueden realizar con respecto a items de configuración
   - Add: Agregar un nuevo item de configuración.
@@ -30,14 +32,14 @@ Los commits seguirán el formato "Prefijo1/Prefijo2/PrefijoN-DescripciónAcción
   - Update: Actualización de un item de configuración ya creado, expandiendo su contenido sin necesariamente haber modificado lo previo
 - La descripción hará referencia a los items de configuración afectados y a lo que haya sido realizado correspondientemente con el prefijo utilizado
 
-#### Templates
+### Templates
 Los templates hacen referencia a las plantillas que diseñaremos a lo largo de la cursada para la entrega de trabajos y documentación del grupo.
 Estos seguiran el siguiente formato: "TMP-Recurso-Versión".
 - TMP: Template, indica el tipo de archivo.
 - Recurso: Archivo o documento al que le sirve como plantilla.
 - Versión: Versión del template (V1, V1.1, V2). El criterio de actualización se irá acordando con el equipo a medida que se desarrolle la cursada.
 
-### Integrantes
+## Integrantes
 A continuación se detalla la lista de integrantes del grupo. Los roles que desempeñaran los mismos a lo largo del proyecto y actividades se detallan en un archivo llamado EstructuraEquipo, cuyo fin es demostrar los diferentes roles por los que pasará cada integrante.
 | Integrante                     | Legajo |
 |--------------------------------|--------|
@@ -48,8 +50,9 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
 | Ramonda, Joaquín Antonio       | 82836  |
 | Zabala, Federica Emilia        | 82830  |
 
-### EstructuraDelRepositorio
+## EstructuraDelRepositorio
 ![EstructuraDelRepositorio](https://github.com/user-attachments/assets/02dc71b9-9f90-48ce-b66c-52123f910277)
+
 Descripción de carpetas y archivos:
 - DocumentosCursada: Carpeta donde se encuentran distintos archivos con información pertinente al cursado de la materia, incluyendo:
   - Apuntes: Carpeta que contendrá apuntes elaborados por los integrantes del grupo de trabajo en base a las clases dictadas.
