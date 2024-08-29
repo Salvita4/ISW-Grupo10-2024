@@ -58,6 +58,7 @@ Descripción de carpetas y archivos:
 - DocumentosCursada: Carpeta donde se encuentran distintos archivos con información pertinente al cursado de la materia, incluyendo:
   - Apuntes: Carpeta que contendrá apuntes elaborados por los integrantes del grupo de trabajo en base a las clases dictadas.
   - Resumenes: Carpeta que contendrá resúmenes elaborados por los integrantes del grupo de trabajo en base a bibliografía y apuntes de clases.
+  - Ejercicios: Carpeta que contendrá los ejercicios realizados por los integrantes del grupo de trabajo y que quiera compartir con el resto.
   - IndiceAportes: Documento en el cual se enumerarán distintas fuentes de información aparte a la bibliografía planteada por la cátedra.
 - Templates: Carpeta que contendrá templates elaborados para entrega de trabajos y documentación del grupo.
 - TrabajosPracticos: Carpeta que contendrá los trabajos prácticos realizados durante el cursado de la materia. Contendrá tantas carpetas llamadas TrabajoPracticoX como trabajos prácticos sean elaborados, siendo X reemplazado por el número de trabajo práctico correspondiente. Internamente, cada trabajo práctico contendrá:
