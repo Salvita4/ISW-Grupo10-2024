@@ -10,7 +10,7 @@ Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizaje
 
 ## Instalación
 ```bash
-git clone https://github.com/Salvita4/ISW-GrupoX-2024.git
+git clone https://github.com/Salvita4/ISW-Grupo10-2024.git
 cd ISW-Grupo10-2024
 ```
 
