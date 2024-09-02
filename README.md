@@ -1,4 +1,4 @@
-# ISW-GrupoX-2024
+# ISW-Grupo10-2024
 Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizajes durante el desarrollo del cursado de la matería Ingeniería y Calidad de Software.
 
 ## Contenido
@@ -11,7 +11,7 @@ Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizaje
 ## Instalación
 ```bash
 git clone https://github.com/Salvita4/ISW-GrupoX-2024.git
-cd ISW-GrupoX-2024
+cd ISW-Grupo10-2024
 ```
 
 ## CriterioLineaBase
@@ -39,6 +39,14 @@ Estos seguiran el siguiente formato: "TMP-Recurso-Versión".
 - TMP: Template, indica el tipo de archivo.
 - Recurso: Archivo o documento al que le sirve como plantilla.
 - Versión: Versión del template (V1, V1.1, V2). El criterio de actualización se irá acordando con el equipo a medida que se desarrolle la cursada.
+
+### Archivos - Apuntes:
+Los apuntes hacen referencia a las notas de clases que vamos a ir subiendo luego del desarrollo de cada una. Estos archivos ser deben subir en formate pdf y deberán seguir el siguiente formato: "AP-Fecha-Tema-Autor-V1".
+- AP: Indica que el archivo es un apunte.
+- Fecha: Indica la fecha de la clase.
+- Tema: Indica el tema de la clase o al que hace referencia el apunte.
+- Autor: Indica quién lo escribio. Nos ayuda a saber a quién acudir para consultar dudas.
+- VN: Indica la versión del apunte, puede sufrir cambios a lo largo del desarrollo de las clases.
 
 ## Integrantes
 A continuación se detalla la lista de integrantes del grupo. Los roles que desempeñaran los mismos a lo largo del proyecto y actividades se detallan en un archivo llamado EstructuraEquipo, cuyo fin es demostrar los diferentes roles por los que pasará cada integrante.
