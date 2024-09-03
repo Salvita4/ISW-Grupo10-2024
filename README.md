@@ -40,13 +40,23 @@ Estos seguiran el siguiente formato: "TMP-Recurso-Versión".
 - Recurso: Archivo o documento al que le sirve como plantilla.
 - Versión: Versión del template (V1, V1.1, V2). El criterio de actualización se irá acordando con el equipo a medida que se desarrolle la cursada.
 
-### Archivos - Apuntes:
-Los apuntes hacen referencia a las notas de clases que vamos a ir subiendo luego del desarrollo de cada una. Estos archivos ser deben subir en formate pdf y deberán seguir el siguiente formato: "AP-Fecha-Tema-Autor-V1".
+### Archivos
+#### Apuntes:
+Los apuntes hacen referencia a las notas de clases que vamos a ir subiendo luego del desarrollo de cada una. Estos archivos ser deben subir en formato pdf y deberán seguir el siguiente nombrado: "AP-Fecha-Tema-Autor-V1".
 - AP: Indica que el archivo es un apunte.
 - Fecha: Indica la fecha de la clase.
 - Tema: Indica el tema de la clase o al que hace referencia el apunte.
 - Autor: Indica quién lo escribio. Nos ayuda a saber a quién acudir para consultar dudas.
 - VN: Indica la versión del apunte, puede sufrir cambios a lo largo del desarrollo de las clases.
+
+#### Prácticos
+Los prácticos hacen referencia a la resolución de prácticos que vamos a ir trabajando a lo largo de la cursada. Estos archivos ser deben subir en formato doc y deberán seguir el siguiente nombrado: "TP-TemaPractico-Dominio-Autor-vn".
+- TP: Indica que el archivo es un trabajo práctico.
+- TemaPractico: Indica el tema que se está ejercitando.
+- Dominio: Indica el dominio o tema que se desarrolla en el ejercicio.
+- Autor: Indica quién lo desarrolló. Nos ayuda a saber a quién acudir para consultar dudas.
+- VN: Indica la versión de la resolución, puede sufrir cambios a lo largo del desarrollo de las clases.
+
 
 ## Integrantes
 A continuación se detalla la lista de integrantes del grupo. Los roles que desempeñaran los mismos a lo largo del proyecto y actividades se detallan en un archivo llamado EstructuraEquipo, cuyo fin es demostrar los diferentes roles por los que pasará cada integrante.
