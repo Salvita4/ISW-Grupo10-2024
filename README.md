@@ -63,6 +63,7 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
 | Integrante                     | Legajo |
 |--------------------------------|--------|
 | Barbera, Juan Salvador         | 86657  |
+| Dalfaro, Marco José            | 69858  |
 | Dinia, Jorge Hassan            | 87423  |
 | Iril, Rocco Maciel             | 90104  |
 | Lima, Nicolás                  | 85569  |
