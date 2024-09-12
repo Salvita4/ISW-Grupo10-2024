@@ -3,10 +3,12 @@ Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizaje
 
 ## Contenido
 - [Instalación de repositorio](#Instalación)
-- [Criterio de Linea Base](#CriterioLineaBase)
-- [Reglas de nombrado](#ReglasNombrado)
+- [Criterio de Linea Base](#Criterio/Linea/Base)
+- [Items de configuración](#Items/De/Configuracion)
+- [Reglas de nombrado](#Reglas/Nombrado/Generales)
 - [Integrantes](#Integrantes)
-- [Estructura del repositorio](#EstructuraDelRepositorio)
+- [Estructura del repositorio](#Estructura/Del/Repositorio)
+- [Disclaimers](#Disclaimers)
 
 ## Instalación
 ```bash
@@ -14,11 +16,14 @@ git clone https://github.com/Salvita4/ISW-Grupo10-2024.git
 cd ISW-Grupo10-2024
 ```
 
-## CriterioLineaBase
+## Criterio/Linea/Base
 La línea base inicial del proyecto se define una vez el documento que específica la utilización del repositorio y su estructura se encuentra completo y consensuado por los miembros del equipo, con el objetivo de usarlo como herramienta que dará soporte al desarrollo de la materia.
 La linea base será actualizada cada vez que se tengan los items de configuración necesarios para realizar una entrega de trabajo práctico, no sin antes haber sido debatido por los integrantes del grupo de trabajo. Si se realizan correcciones al trabajo realizado post-entrega, también se modificará la línea base para reflejar los cambios realizados, y para tener la versión más estable y completa de los items de configuración.
 
-## ReglasNombrado
+## Items/De/Configuracion
+#### TO DO LISTA IC con su ubicacion y reglas de nombrado general
+
+## Reglas/Nombrado/Generales
 En reglas generales, siempre se usará PascalCase para nombrar tanto los directorios como ítems de configuración. De manera particular se exigirá la cumplimentación de las siguientes reglas:
 
 ### Commits
@@ -70,21 +75,96 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
 | Ramonda, Joaquín Antonio       | 82836  |
 | Zabala, Federica Emilia        | 82830  |
 
-## EstructuraDelRepositorio
-![EstructuraDelRepositorio](https://github.com/user-attachments/assets/02dc71b9-9f90-48ce-b66c-52123f910277)
+## Estructura/Del/Repositorio
+```
+└── ISW-Grupo10-2024
+    ├── DocumentosCursada/                                                 
+    |   ├── Apuntes/                                                       
+    |   ├── Bibliografia/                                                  
+    |   |   ├── Agile/
+    |   |   ├── IngenieriaDeSoftware/
+    |   |   ├── LeanYKanban/
+    |   |   ├── PresentacionesDeClase/
+    |   |   ├── SCM/
+    |   |   ├── TestingDeSoftware/
+    |   |   └── LinkClasesGrabas.txt
+    |   |
+    |   ├── Resumenes/
+    |   ├── Utils/
+    |   |   ├── Cronograma.txt
+    |   |   └── PokerPlanningCards.pdf
+    |   └── IndiceAportes.docx
+    |
+    ├── Templates/
+    |	
+    ├── TrabajosConceptuales/
+    |   ├── GuiaPraticosConceptuales/
+    |   |   
+    |   ├── TrabajoPracticoConceptual1-CharlaTED/
+    |   |   ├── MaterialDeApoyo/
+    |   |   └── Producciones/
+    |   └── TrabajoPracticoConceptual1-PosterCientifico/
+    |       ├── MaterialDeApoyo/
+    |       └── Producciones/
+    |
+    ├── TrabajosPracticos/
+    │   ├── GuiasEjercicios/
+    │   |   
+    │   ├── TrabajoPractico1/            *Se muestra un ejemplo*
+    |   |   └── DocumentosAentregar/     +---------------------+
+    |   |                                |   CADA CARPETA DE   |
+    │   ├── TrabajoPractico2/            |   TP TENDRA         |
+    │   ├── TrabajoPractico3/            |   SOLO A AQEULLAS   |
+    │   ├── TrabajoPractico4/            |   QUE NECESITE      |
+    │   ├── TrabajoPractico5/            +---------------------+
+    │   ├── TrabajoPractico6/            *Se muestra un ejemplo*
+    |   |   ├── DocumentosAentregar/
+    |   |   ├── EstructuraCodigo/
+    |   |   └── Modelos/
+    |   |
+    │   ├── TrabajoPractico7/
+    │   ├── TrabajoPractico8/
+    │   ├── TrabajoPractico9/
+    │   ├── TrabajoPractico10/
+    │   ├── TrabajoPractico11/
+    │   ├── TrabajoPractico12/
+    │   ├── TrabajoPractico13/
+    │   └── TrabajoPractico14/
+    |
+    ├── Glosario.docx
+    ├── IndiceMinutas.docx
+    ├── README.md 
+    └── Tareas.docx 
+```
 
-Descripción de carpetas y archivos:
+### Descripción de carpetas y archivos:
 - DocumentosCursada: Carpeta donde se encuentran distintos archivos con información pertinente al cursado de la materia, incluyendo:
   - Apuntes: Carpeta que contendrá apuntes elaborados por los integrantes del grupo de trabajo en base a las clases dictadas.
+  - Bibliografía: Carpeta que contedrá las subcarpetas con el material bibliográfico de la cátedra, separados por temas (Agile, SCM, LeanYKanban, etc). Además contará con un archivo txt donde almacenamos el link a las clases grabadas.
   - Resumenes: Carpeta que contendrá resúmenes elaborados por los integrantes del grupo de trabajo en base a bibliografía y apuntes de clases.
-  - Ejercicios: Carpeta que contendrá los ejercicios realizados por los integrantes del grupo de trabajo y que quiera compartir con el resto.
+  - Utils: Carpeta con documentos extras útiles, tales como el link al cronograma o las cartas de poker planning
   - IndiceAportes: Documento en el cual se enumerarán distintas fuentes de información aparte a la bibliografía planteada por la cátedra.
+
 - Templates: Carpeta que contendrá templates elaborados para entrega de trabajos y documentación del grupo.
-- TrabajosPracticos: Carpeta que contendrá los trabajos prácticos realizados durante el cursado de la materia. Contendrá tantas carpetas llamadas TrabajoPracticoX como trabajos prácticos sean elaborados, siendo X reemplazado por el número de trabajo práctico correspondiente. Internamente, cada trabajo práctico contendrá:
+
+- TrabajosConceptuales: Carpeta que contendrá los trabajos practicos conceptuales realizados durante el cursado de la materia.
+  - GuiaPracticosConceptuales: Carpeta que contendrá la guía para la confección de los trabajos prácticos conceptuales.
+  - TrabajoPracticoConceptual1-CharlaTED: Carpeta que contendrá el desarrollo del Trabajo práctico coneptual1 - CharlaTED.
+    - MaterialDeApoyo: Carpeta que contendrá todo el material que sirva de soporte para la realización del trabajo.
+    - Produccioens: Carpeta que contendrá las salidas del desarrollo del trabajo.
+  - TrabajoPracticoConceptual1-PosterCientifico: Carpeta que contendrá el desarrollo del Trabajo práctico coneptual1 - PosterCientifico. Su estructura es igual a la mencionada anteriormente 👆.
+
+- TrabajosPracticos: Carpeta que contendrá los trabajos prácticos realizados durante el cursado de la materia. Contendrá tantas carpetas llamadas TrabajoPracticoX como trabajos prácticos sean elaborados, siendo X reemplazado por el número de trabajo práctico correspondiente. Internamente, cada trabajo práctico contendrá (No todos los trabajos tendrán las 3 carpetas, solo tendrán aquellas que necesiten):
   - DocumentosAEntregar: Carpeta que contendrá los documentos que conformen la entrega final del trabajo práctico, explicando lo correspondiente al trabajo que haga referencia.
   - EstructuraCodigo: Carpeta que contendrá el código fuente del trabajo práctico en trabajos donde se deba entregar un código funcional.
   - Modelos: Carpeta que contendrá los distintos modelos elaborados durante el desarrollo de los trabajos prácticos y que conforman la entrega final.
+- GuiaEjecicios: Carpeta que contendrá tanto la guía de ejercicios prácticos resueltos, así como la guía de praticos a resolver.
+
 - EstructuraEquipo: Documento que se modificará a lo largo de la cursada dependiendo del rol que desempeñe cada integrante del grupo en cada trabajo, especificando el mismo y sus responsabilidades.
 - Glosario: Documento que contendrá explicaciones a términos utilizados a lo largo del desarrollo de la materia y trabajos prácticos.
 - IndiceMinutas: Documento que contendrá las distintas reuniones que se llevan a cabo por los integrantes del grupo, incluyendo el tema a tratar, conclusiones a las que se llegaron, fecha de realización y miembros que asisten.
 - README: Archivo que contiene explicación sobre el repositorio, su propósito y su función. Contiene la estructura del repositorio, los integrantes de trabajo, las reglas de nombrado de los items de configuración y el criterio de linea base definido por los integrantes del grupo de trabajo.
+- Tareas: Documento que contendrá las táreas de clase a desarrollar. Sirve como recordatorio de qué es lo que tenemos para hacer.
+
+## Disclaimers
+- Si se encuentran archivos cuyo nombre es igual a "x" o "ResumenX" (vacíos), ignorarles, se usan para cargar efectivamente la carpeta al repositorio.
