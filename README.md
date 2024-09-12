@@ -14,6 +14,8 @@ Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizaje
 ```bash
 git clone https://github.com/Salvita4/ISW-Grupo10-2024.git
 cd ISW-Grupo10-2024
+
+*Siempre hacer pull o clonar el repo en una nueva carpeta*
 ```
 
 ## Criterio/Linea/Base
