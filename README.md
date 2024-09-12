@@ -113,14 +113,14 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
     │   ├── GuiasEjercicios/
     │   |   
     │   ├── TrabajoPractico1/            *Se muestra un ejemplo*
-    |   |   └── DocumentosAentregar/     +---------------------+
+    |   |   └── DocumentosAEntregar/     +---------------------+
     |   |                                |   CADA CARPETA DE   |
     │   ├── TrabajoPractico2/            |   TP TENDRA         |
     │   ├── TrabajoPractico3/            |   SOLO A AQEULLAS   |
     │   ├── TrabajoPractico4/            |   QUE NECESITE      |
     │   ├── TrabajoPractico5/            +---------------------+
     │   ├── TrabajoPractico6/            *Se muestra un ejemplo*
-    |   |   ├── DocumentosAentregar/
+    |   |   ├── DocumentosAEntregar/
     |   |   ├── EstructuraCodigo/
     |   |   └── Modelos/
     |   |
