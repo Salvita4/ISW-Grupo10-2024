@@ -19,7 +19,7 @@ cd ISW-Grupo10-2024
 ```
 
 ## Criterio/Linea/Base
-La línea base inicial del proyecto se define una vez el documento que específica la utilización del repositorio y su estructura se encuentra completo y consensuado por los miembros del equipo, con el objetivo de usarlo como herramienta que dará soporte al desarrollo de la materia.
+La línea base inicial del proyecto se define una vez el documento que específica la utilización del repositorio y su estructura se encuentra completo y consensuado por los miembros del equipo, con el objetivo de usarlo como herramienta que dará soporte al desarrollo de la materia.  
 La linea base será actualizada cada vez que se tengan los items de configuración necesarios para realizar una entrega de trabajo práctico, no sin antes haber sido debatido por los integrantes del grupo de trabajo. Si se realizan correcciones al trabajo realizado post-entrega, también se modificará la línea base para reflejar los cambios realizados, y para tener la versión más estable y completa de los items de configuración.
 
 ## Items/De/Configuracion
@@ -56,7 +56,7 @@ La linea base será actualizada cada vez que se tengan los items de configuraci�
 | &lt;-NombreMiembroOpcional&gt;             | Nombre de uno de los integrantes del grupo en caso que haya variaciones del mismo trabajo Ej. Ejercicios desarrollados en clase   |
 | &lt;N&gt;                                  | Número cardinal de trabajo al que se hace referencia                                                                              |
 
-Observación 1: Para todos los archivos extraídos de la UV, se dejaron sus nombres base.
+Observación 1: Para todos los archivos extraídos de la UV, se dejaron sus nombres base.  
 Observación 2: Dentro de las URLs se modifican las siglas y en vez de &lt;&gt; se utilizan []
 
 
