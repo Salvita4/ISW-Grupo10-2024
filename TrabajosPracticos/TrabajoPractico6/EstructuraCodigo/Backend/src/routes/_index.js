@@ -2,10 +2,13 @@ const express = require('express');
 const routes = express.Router();
 
 // Define las rutas de la API
-const  tiposDeCargaRoutes = require('./tiposDeCargaRoute');
+const  soporteRoutes = require('./soporteRoute');
+const pedidosRoutes = require('./pedidosRoute');
 
 // Define las rutas y sus controladores
-routes.use('/tiposDeCarga', tiposDeCargaRoutes);
+routes.use('/soporte', soporteRoutes);
+routes.use('/pedidos', pedidosRoutes);
+
 
 // Maneja las excepciones de las rutas
 routes.use("*", (req, res, next) => {
