@@ -17,6 +17,10 @@ cd ISW-Grupo10-2024
 
 *Siempre hacer pull o clonar el repo en una nueva carpeta*
 
+------> COMO PULLEAR UNA RAMA:
+git pull origin NombreRamaRemota NombreRamaLocal  --Pullea la rama remota en una rama local
+git checkout NombreRamaLocal --Me traslado a la rama local recien pulleada
+
 ------> CUANDO SE PULLEA UN TP PROGRAMABLE:
 - ejecturar en la terminal: npm insstall  --Instala todas las dependencias.
 ```
