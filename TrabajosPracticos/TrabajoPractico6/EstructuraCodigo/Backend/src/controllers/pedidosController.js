@@ -1,25 +1,79 @@
-const  pedidosOrm  = require('../orm/pedidosOrm');
+const pedidosOrm = require('../orm/pedidosOrm');
 const emailService = require('../services/emailService');
+const notificacionPushService = require('../services/notificacionPushService');
+const soporteOrm = require('../orm/soporteOrm');
+
 module.exports = {
-getAllPedidos: async (req,res)=>{
+getAllPedidos: async (req, res) => {
     try {
         const pedidos = await pedidosOrm.getAll();
-        console.log(pedidos)
-        res.status(200).json(pedidos);
+
+        const tiposCarga = await soporteOrm.getAll('TiposCarga');
+
+        // Obtener todas las localidades y provincias
+        const localidades = await soporteOrm.getAll('Localidades');
+        const provincias = await soporteOrm.getAll('Provincias');
+
+        // Mapear los pedidos con los nombres de las localidades y provincias
+        const pedidosConLocalidadesYProvincias = pedidos.map((pedido) => {
+        const tipoCarga = tiposCarga.find((tip) => tip.id == pedido.tipoCarga);
+
+        // Buscar la localidad y provincia para domicilioRetiro
+        const localidadRetiro = localidades.find((loc) => loc.id == pedido.domicilioRetiro.id_localidad);
+        const provinciaRetiro = localidadRetiro ? provincias.find((prov) => prov.id == localidadRetiro.id_provincia) : null;
+
+        // Buscar la localidad y provincia para domicilioEntrega
+        const localidadEntrega = localidades.find((loc) => loc.id == pedido.domicilioEntrega.id_localidad);
+        const provinciaEntrega = localidadEntrega ? provincias.find((prov) => prov.id == localidadEntrega.id_provincia) : null;
+
+        // Retornar el pedido con los nombres de las localidades y provincias actualizados
+        return {
+            ...pedido,
+            tipoCarga: tipoCarga.nombre,
+            domicilioRetiro: {
+            ...pedido.domicilioRetiro,
+            localidad: localidadRetiro ? localidadRetiro.nombre : 'Localidad no encontrada',
+            provincia: provinciaRetiro ? provinciaRetiro.nombre : 'Provincia no encontrada',
+            },
+            domicilioEntrega: {
+            ...pedido.domicilioEntrega,
+            localidad: localidadEntrega ? localidadEntrega.nombre : 'Localidad no encontrada',
+            provincia: provinciaEntrega ? provinciaEntrega.nombre : 'Provincia no encontrada',
+            },
+        };
+        });
+
+        console.log(pedidosConLocalidadesYProvincias);
+        res.status(200).json(pedidosConLocalidadesYProvincias);
     } catch (error) {
-        res.status(500).json({error: 'Error al obtener los pedidos.'});
+        res.status(500).json({ error: 'Error al obtener los pedidos.' });
     }
-},
-createPedido: async (req,res)=>{
+    },
+createPedido: async (req, res) => {
     try {
         const newPedido = req.body;
+        const expoPushToken = newPedido.expoPushToken;  // Asegúrate de obtener el token desde el request
+
+        // Insertar el pedido en la base de datos
         await pedidosOrm.insert(newPedido);
+
+        // Enviar el correo electrónico
         await emailService.sendEmail('Nuevo pedido en la zona', newPedido);
-        res.status(201).json({message: 'Pedido creado exitosamente.'});
+
+        // Enviar notificación push
+        if (expoPushToken) {
+        await notificacionPushService.sendPushNotification(expoPushToken, {
+            title: 'Pedido creado',
+            body: 'Tu pedido ha sido registrado exitosamente.',
+            data: { pedidoId: newPedido.id },
+        });
+        }
+
+        res.status(201).json({ message: 'Pedido creado exitosamente.' });
     } catch (error) {
-        res.status(500).send({error: 'Error al crear el pedido.'});
+        res.status(500).send({ error: 'Error al crear el pedido.' });
     }
-},
+    },
 getPedidoById: async (req,res)=>{
     try {
         const pedidoId = req.params.id;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import colores from '../styles/colores';
 
@@ -10,8 +10,23 @@ const formatDate = (date) => {
   return `${day}/${month}/${year}`;
 };
 
-const CustomDatePicker = ({ label, date, onDateChange, placeholder, error }) => {
+const CustomDatePicker = ({ label, date, onDateChange, minDate, maxDate, placeholder, error }) => {
   const [showPicker, setShowPicker] = useState(false);
+
+  const handleDateChange = (event, selectedDate) => {
+    setShowPicker(false);
+    if (selectedDate) {
+      // Si hay fecha mínima y la fecha seleccionada es menor
+      if (minDate && selectedDate < minDate) {
+        return; // No permite seleccionar fechas menores a minDate
+      }
+      // Si hay fecha máxima y la fecha seleccionada es mayor
+      if (maxDate && selectedDate > maxDate) {
+        return; // No permite seleccionar fechas mayores a maxDate
+      }
+      onDateChange(selectedDate);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -27,12 +42,9 @@ const CustomDatePicker = ({ label, date, onDateChange, placeholder, error }) => 
           value={date || new Date()}
           mode="date"
           display="default"
-          onChange={(event, selectedDate) => {
-            setShowPicker(false);
-            if (selectedDate) {
-              onDateChange(selectedDate);
-            }
-          }}
+          onChange={handleDateChange}
+          minimumDate={minDate}
+          maximumDate={maxDate}
         />
       )}
       {error && <Text style={styles.errorText}>{error}</Text>}
@@ -53,12 +65,11 @@ const styles = StyleSheet.create({
     height: 40,
     width: '100%',
     borderColor: colores.primary,
-    // borderWidth: 1,
     borderRadius: 20,
     paddingHorizontal: 10,
     fontSize: 16,
     elevation: 5,
-    backgroundColor: colores.background
+    backgroundColor: colores.background,
   },
   inputError: {
     borderColor: 'red',

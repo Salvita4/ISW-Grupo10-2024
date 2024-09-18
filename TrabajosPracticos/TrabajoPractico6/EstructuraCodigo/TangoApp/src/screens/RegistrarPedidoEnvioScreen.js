@@ -26,7 +26,11 @@ const RegistrarPedidoEnvioScreen = () => {
     referencia: ''
   });
   const [fechaRetiro, setFechaRetiro] = useState(new Date());
-  const [fechaEntrega, setFechaEntrega] = useState(new Date());
+  const [fechaEntrega, setFechaEntrega] = useState(() => {
+    const initialDate = new Date();
+    initialDate.setDate(initialDate.getDate() + 1); // Establece la fecha de entrega como un día después
+    return initialDate;
+  });
   const [imagenes, setImagenes] = useState([]);
   const [provincias, setProvincias] = useState([]);
   const [errors, setErrors] = useState({});
@@ -47,6 +51,7 @@ const RegistrarPedidoEnvioScreen = () => {
     let valid = true;
     let errors = {};
   
+    // Validar tipo de carga
     if (!tipoCarga) {
       errors.tipoCarga = "Selecciona un tipo de carga";
       valid = false;
@@ -58,7 +63,7 @@ const RegistrarPedidoEnvioScreen = () => {
       valid = false;
     }
     if (!domicilioRetiro.numero) {
-      errors.domicilioRetiroNumero = "El número es requerido";
+      errors.domicilioRetiroNumero = "El número es requerido, ingrese un 0 si no tiene";
       valid = false;
     }
     if (!domicilioRetiro.id_localidad) {
@@ -69,6 +74,10 @@ const RegistrarPedidoEnvioScreen = () => {
       errors.domicilioRetiroProvincia = "La provincia es requerida";
       valid = false;
     }
+    if (domicilioRetiro.referencia.length > 150) {
+      errors.domicilioRetiroReferencia = "La referencia no puede exceder los 150 caracteres";
+      valid = false;
+    }
   
     // Validar domicilio de entrega
     if (!domicilioEntrega.calle) {
@@ -76,7 +85,7 @@ const RegistrarPedidoEnvioScreen = () => {
       valid = false;
     }
     if (!domicilioEntrega.numero) {
-      errors.domicilioEntregaNumero = "El número es requerido";
+      errors.domicilioEntregaNumero = "El número es requerido, ingrese un 0 si no tiene";
       valid = false;
     }
     if (!domicilioEntrega.id_localidad) {
@@ -85,6 +94,20 @@ const RegistrarPedidoEnvioScreen = () => {
     }
     if (!domicilioEntrega.id_provincia) {
       errors.domicilioEntregaProvincia = "La provincia es requerida";
+      valid = false;
+    }
+    if (domicilioEntrega.referencia.length > 150) {
+      errors.domicilioEntregaReferencia = "La referencia no puede exceder los 150 caracteres";
+      valid = false;
+    }
+  
+    // Validar fechas
+    if (fechaRetiro >= fechaEntrega) {
+      errors.fechaRetiro = "La fecha de retiro debe ser menor a la fecha de entrega";
+      valid = false;
+    }
+    if ((fechaEntrega - fechaRetiro) < 24 * 60 * 60 * 1000) { // Menos de 1 día
+      errors.fechaEntrega = "La fecha de entrega debe ser al menos un día después de la fecha de retiro";
       valid = false;
     }
   
@@ -136,13 +159,13 @@ const RegistrarPedidoEnvioScreen = () => {
       <DomicilioForm
         domicilio={domicilioRetiro}
         setDomicilio={setDomicilioRetiro}
-        label="Informacion de Retiro"
+        label="Información de Retiro"
         provincias={provincias}
         error={{
           calle: errors.domicilioRetiroCalle,
           numero: errors.domicilioRetiroNumero,
-          localidad: errors.domicilioRetiroLocalidad,
-          provincia: errors.domicilioRetiroProvincia,
+          id_localidad: errors.domicilioRetiroLocalidad,
+          id_provincia: errors.domicilioRetiroProvincia,
         }}
       />
 
@@ -150,6 +173,7 @@ const RegistrarPedidoEnvioScreen = () => {
         date={fechaRetiro}
         onDateChange={setFechaRetiro}
         label="Fecha de Retiro"
+        minDate={new Date()}
         error={errors.fechaRetiro}
       />
       </View>
@@ -158,13 +182,13 @@ const RegistrarPedidoEnvioScreen = () => {
         <DomicilioForm
           domicilio={domicilioEntrega}
           setDomicilio={setDomicilioEntrega}
-          label="Informacion de Entrega"
+          label="Información de Entrega"
           provincias={provincias}
           error={{
             calle: errors.domicilioEntregaCalle,
             numero: errors.domicilioEntregaNumero,
-            localidad: errors.domicilioEntregaLocalidad,
-            provincia: errors.domicilioEntregaProvincia,
+            id_localidad: errors.domicilioEntregaLocalidad,
+            id_provincia: errors.domicilioEntregaProvincia,
           }}
         />
 
@@ -172,6 +196,7 @@ const RegistrarPedidoEnvioScreen = () => {
           date={fechaEntrega}
           onDateChange={setFechaEntrega}
           label="Fecha de Entrega"
+          minDate={new Date(fechaRetiro).setDate(fechaRetiro.getDate() + 1)}
           error={errors.fechaEntrega}
         />
       </View>

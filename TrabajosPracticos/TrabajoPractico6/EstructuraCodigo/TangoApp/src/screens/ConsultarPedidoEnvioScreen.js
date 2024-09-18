@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ScrollView, Image } from 'react-native';
 import apiClient from '../services/apiClient';
+import globalStyles from '../styles/globalStyles';
+import colores from '../styles/colores';
 
 const ConsultarPedidosEnviosScreen = () => {
   const [pedidosEnvios, setPedidosEnvios] = useState([]);
@@ -12,7 +14,6 @@ const ConsultarPedidosEnviosScreen = () => {
     const fetchPedidosEnvios = async () => {
       try {
         const response = await apiClient.get('/pedidos');
-        console.log(response)
         setPedidosEnvios(response.data); // Asigna los datos obtenidos al estado
       } catch (error) {
         setError('Error al cargar los pedidos');
@@ -26,14 +27,22 @@ const ConsultarPedidosEnviosScreen = () => {
   }, []);
 
   // Renderizar cada item de la lista
-  const renderPedidoItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+  const renderPedidoItem = ({ item, index }) => (
+    <View style={globalStyles.container} key={index}>
       <Text style={styles.itemTitle}>Pedido ID: {item._id}</Text>
       <Text>Tipo de carga: {item.tipoCarga}</Text>
-      <Text>Retiro: {item.domicilioRetiro.calle}, {item.domicilioRetiro.numero}, {item.domicilioRetiro.localidad}, {item.domicilioRetiro.provincia}</Text>
-      <Text>Entrega: {item.domicilioEntrega.calle}, {item.domicilioRetiro.numero}, {item.domicilioEntrega.localidad}, {item.domicilioRetiro.provincia}</Text>
+      <Text>Dirección Retiro: {item.domicilioRetiro.calle}, {item.domicilioRetiro.numero}, {item.domicilioRetiro.localidad}, {item.domicilioRetiro.provincia}</Text>
+      <Text>Dirección Entrega: {item.domicilioEntrega.calle}, {item.domicilioRetiro.numero}, {item.domicilioEntrega.localidad}, {item.domicilioRetiro.provincia}</Text>
       <Text>Fecha de Retiro: {new Date(item.fechaRetiro).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</Text>
       <Text>Fecha de Entrega: {new Date(item.fechaEntrega).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</Text>
+      
+      {item.imagenes && item.imagenes.length > 0 && (
+        <ScrollView horizontal style={styles.imageContainer}>
+          {item.imagenes.map((imageUri, index) => (
+            <Image key={index} source={{ uri: imageUri }} style={styles.image} />
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 
@@ -57,23 +66,21 @@ const ConsultarPedidosEnviosScreen = () => {
 
   // Pantalla de lista
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={pedidosEnvios}
-        renderItem={renderPedidoItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.listContainer}
-      />
-    </View>
+    <FlatList
+      data={pedidosEnvios}
+      renderItem={renderPedidoItem}
+      keyExtractor={(item) => item._id}
+      contentContainerStyle={styles.container}
+    />
   );
 };
 
 // Estilos
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colores.background,
   },
   listContainer: {
     flexGrow: 1,
@@ -103,6 +110,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  imageContainer: {
+    marginTop: 10,
+    flexDirection: 'row',
+  },
+  image: {
+    width: 100,
+    height: 100,
+    marginHorizontal: 5,
+    borderRadius: 10,
   },
 });
 

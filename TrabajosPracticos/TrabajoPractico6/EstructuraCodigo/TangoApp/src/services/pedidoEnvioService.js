@@ -1,3 +1,4 @@
+import * as Notifications from 'expo-notifications';
 import apiClient from './apiClient';
 
 export const getPedidosEnvio = async () => {
@@ -10,9 +11,41 @@ export const getPedidosEnvio = async () => {
   }
 };
 
+// Función para obtener el expoPushToken
+export const getExpoPushToken = async () => {
+  let token;
+  try {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+
+    if (finalStatus !== 'granted') {
+      alert('No se han concedido permisos para las notificaciones push');
+      return;
+    }
+
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+  } catch (error) {
+    console.error('Error al obtener el token de notificación:', error);
+  }
+
+  return token;
+};
+
+// Función para registrar el pedido
 export const registrarPedido = async (pedido) => {
   try {
-    const response = await apiClient.post('/pedidos', pedido);
+    // Obtener el token de notificación
+    const expoPushToken = await getExpoPushToken();
+
+    // Agregar el token de notificación al pedido
+    const pedidoConToken = { ...pedido, expoPushToken };
+
+    const response = await apiClient.post('/pedidos', pedidoConToken);
     return response.data;
   } catch (error) {
     console.error('Error al registrar pedido:', error);

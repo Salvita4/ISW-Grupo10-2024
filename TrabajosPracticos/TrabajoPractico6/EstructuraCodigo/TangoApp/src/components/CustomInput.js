@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import colores from '../styles/colores';
 
 const CustomInput = ({ label, value, onChangeText, placeholder, error, secureTextEntry, onErrorClear, keyboardType = 'text'}) => {
+  const [charLimitWarning, setCharLimitWarning] = useState(false); // Estado para manejar la advertencia
+
   const handleChangeText = (text) => {
     if (onErrorClear) {
-      onErrorClear(); // Limpia el error
+      onErrorClear(); // Limpia el error si existe
     }
-    onChangeText(text); // Actualiza el texto
+    
+    // Verifica si se alcanzó el límite de caracteres
+    if (text.length >= 150) {
+      setCharLimitWarning(true); // Muestra la advertencia
+    } else {
+      setCharLimitWarning(false); // Oculta la advertencia
+    }
+
+    onChangeText(text); // Actualiza el valor del texto
   };
 
   return (
@@ -21,7 +31,11 @@ const CustomInput = ({ label, value, onChangeText, placeholder, error, secureTex
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         placeholderTextColor={'black'}
+        maxLength={150}
       />
+      {/* Muestra el mensaje de advertencia si se alcanza el límite */}
+      {charLimitWarning && <Text style={styles.errorText}>No se pueden ingresar más de 150 caracteres</Text>}
+      {/* Muestra el mensaje de error si existe */}
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
@@ -39,7 +53,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     borderColor: colores.primary,
-    // borderWidth: 1,
     borderRadius: 20,
     elevation: 5,
     backgroundColor: colores.background,

@@ -13,24 +13,24 @@ const DomicilioForm = ({ domicilio, setDomicilio, label, provincias, error }) =>
 
   useEffect(() => {
     if (domicilio.provincia !== selectedProvince) {
-      setSelectedProvince(domicilio.provincia);
+      setSelectedProvince(domicilio.id_provincia);
     }
-    if (domicilio.localidad !== selectedLocality) {
-      setSelectedLocality(domicilio.localidad);
+    if (domicilio.id_localidad !== selectedLocality) {
+      setSelectedLocality(domicilio.id_localidad);
     }
-  }, [domicilio.provincia, domicilio.localidad]);  
+  }, [domicilio.provincia, domicilio.id_localidad]);  
 
-  const handleProvinceChange = (province) => {
-    setSelectedProvince(province);
+  const handleProvinceChange = (provincia) => {
+    setSelectedProvince(provincia);
     setDomicilio((prev) => ({
       ...prev,
-      provincia: province,
-      localidad: '', // Reset localidad cuando cambia la provincia
+      id_provincia: provincia,
+      id_localidad: '', // Reset localidad cuando cambia la provincia
     }));
   
-    // Fetch localities basado en la provincia seleccionada correctamente
+    // Fetch localidades basado en la provincia seleccionada correctamente
     apiClient.get('/soporte/Localidades').then((response) => {
-      setLocalities(response.data.filter((e) => e.id_provincia === province));
+      setLocalities(response.data.filter((e) => e.id_provincia === provincia));
     });
   };  
 
@@ -58,15 +58,15 @@ const DomicilioForm = ({ domicilio, setDomicilio, label, provincias, error }) =>
         options={provincias}
         label="Provincia"
         placeholder="Seleccione una provincia"
-        error={error?.provincia}
+        error={error?.id_provincia}
       />
       <CustomSelect
         selectedValue={selectedLocality}
-        onValueChange={(locality) => setDomicilio((prev) => ({ ...prev, localidad: locality }))}
+        onValueChange={(locality) => setDomicilio((prev) => ({ ...prev, id_localidad: locality }))}
         options={localities}
         label="Localidad"
         placeholder="Seleccione una localidad"
-        error={error?.localidad}
+        error={error?.id_localidad}
       />
       <CustomInput
         label="Referencia (opcional)"

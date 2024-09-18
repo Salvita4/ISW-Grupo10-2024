@@ -16,15 +16,27 @@ const AppNavigator = () => {
         component={HomeScreen} 
         options={{ headerShown: false }}
       />
-      <Stack.Screen styles={styles.stack}
+      <Stack.Screen
         name="RegistrarPedidoEnvioScreen" 
         component={RegistrarPedidoEnvioScreen} 
-        options={{ title: 'Registrar Pedido de Envío' }}
+        options={{ 
+          title: 'Registrar Pedido de Envío',
+          headerStyle: {
+            backgroundColor: colores.secondary, 
+          },
+          headerTintColor: '#fff',
+        }}
       />
       <Stack.Screen 
         name="ConsultarPedidoEnvioScreen" 
         component={ConsultarPedidoEnvioScreen} 
-        options={{ title: 'Consultar Pedido de Envío' }}
+        options={{ 
+          title: 'Consultar Pedido de Envío',
+          headerStyle: {
+            backgroundColor: colores.secondary, 
+          },
+          headerTintColor: '#fff',
+        }}
       />
     </Stack.Navigator>
   );
