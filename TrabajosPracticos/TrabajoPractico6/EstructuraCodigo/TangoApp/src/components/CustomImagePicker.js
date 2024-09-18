@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import colores from '../styles/colores';
 
 const CustomImagePicker = ({ images, setImages }) => {
   const pickImages = async () => {
@@ -33,15 +34,16 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginVertical: 10,
+    elevation: 10
   },
   button: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
-    backgroundColor: '#007bff',
+    borderRadius: 20,
+    backgroundColor: colores.secondary,
   },
   buttonText: {
-    color: '#fff',
+    color: colores.containterBackground,
     fontSize: 16,
   },
   imageContainer: {
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginHorizontal: 5,
-    borderRadius: 5,
+    borderRadius: 10,
   },
 });
 

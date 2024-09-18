@@ -6,6 +6,8 @@ import CustomButton from '../components/CustomButton';
 import CustomImagePicker from '../components/CustomImagePicker';
 import CustomDatePicker from '../components/CustomDatePicker';
 import DomicilioForm from '../components/DomicilioForm';
+import globalStyles from '../styles/globalStyles';
+import colores from '../styles/colores';
 
 const RegistrarPedidoEnvioScreen = () => {
   const [tipoCarga, setTipoCarga] = useState("");
@@ -112,20 +114,23 @@ const RegistrarPedidoEnvioScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <CustomSelect
-        selectedValue={tipoCarga}
-        onValueChange={(itemValue) => setTipoCarga(itemValue)}
-        onErrorClear={() => setErrors((prevErrors) => ({ ...prevErrors, tipoCarga: undefined }))}
-        options={tipoCargaOptions}
-        label="Tipo de carga"
-        placeholder="Seleccione un tipo de carga"
-        error={errors.tipoCarga}
-      />
+      <View style={globalStyles.container}>
+        <CustomSelect
+          selectedValue={tipoCarga}
+          onValueChange={(itemValue) => setTipoCarga(itemValue)}
+          onErrorClear={() => setErrors((prevErrors) => ({ ...prevErrors, tipoCarga: undefined }))}
+          options={tipoCargaOptions}
+          label="Tipo de carga"
+          placeholder="Seleccione un tipo de carga"
+          error={errors.tipoCarga}
+        />
+      </View>
 
+      <View style={globalStyles.container}>
       <DomicilioForm
         domicilio={domicilioRetiro}
         setDomicilio={setDomicilioRetiro}
-        label="Domicilio de Retiro"
+        label="Informacion de Retiro"
         provinces={provinces}
         error={{
           calle: errors.domicilioRetiroCalle,
@@ -141,26 +146,29 @@ const RegistrarPedidoEnvioScreen = () => {
         label="Fecha de Retiro"
         error={errors.fechaRetiro}
       />
+      </View>
+      
+      <View style={globalStyles.container}>
+        <DomicilioForm
+          domicilio={domicilioEntrega}
+          setDomicilio={setDomicilioEntrega}
+          label="Informacion de Entrega"
+          provinces={provinces}
+          error={{
+            calle: errors.domicilioEntregaCalle,
+            numero: errors.domicilioEntregaNumero,
+            localidad: errors.domicilioEntregaLocalidad,
+            provincia: errors.domicilioEntregaProvincia,
+          }}
+        />
 
-      <DomicilioForm
-        domicilio={domicilioEntrega}
-        setDomicilio={setDomicilioEntrega}
-        label="Domicilio de Entrega"
-        provinces={provinces}
-        error={{
-          calle: errors.domicilioEntregaCalle,
-          numero: errors.domicilioEntregaNumero,
-          localidad: errors.domicilioEntregaLocalidad,
-          provincia: errors.domicilioEntregaProvincia,
-        }}
-      />
-
-      <CustomDatePicker
-        date={fechaEntrega}
-        onDateChange={setFechaEntrega}
-        label="Fecha de Entrega"
-        error={errors.fechaEntrega}
-      />
+        <CustomDatePicker
+          date={fechaEntrega}
+          onDateChange={setFechaEntrega}
+          label="Fecha de Entrega"
+          error={errors.fechaEntrega}
+        />
+      </View>
 
       <CustomImagePicker images={images} setImages={setImages} />
 
@@ -173,7 +181,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colores.background,
   },
 });
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import colores from '../styles/colores';
 
 const formatDate = (date) => {
   const day = date.getDate().toString().padStart(2, '0');
@@ -46,16 +47,18 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 5,
-    color: '#333',
+    color: colores.primary,
   },
   input: {
-    height: 50,
+    height: 40,
     width: '100%',
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
+    borderColor: colores.primary,
+    // borderWidth: 1,
+    borderRadius: 20,
     paddingHorizontal: 10,
     fontSize: 16,
+    elevation: 5,
+    backgroundColor: colores.background
   },
   inputError: {
     borderColor: 'red',

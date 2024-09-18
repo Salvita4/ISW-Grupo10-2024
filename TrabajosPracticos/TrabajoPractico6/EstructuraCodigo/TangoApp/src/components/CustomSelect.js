@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import colores from '../styles/colores';
+import globalStyles from '../styles/globalStyles';
 
 const CustomSelect = ({ label, selectedValue, onValueChange, options, placeholder, error, onErrorClear }) => {
   const handleValueChange = (itemValue) => {
@@ -18,8 +20,10 @@ const CustomSelect = ({ label, selectedValue, onValueChange, options, placeholde
           selectedValue={selectedValue}
           onValueChange={handleValueChange}
           style={[error && styles.pickerError]}
+          selectionColor={colores.primary}
+          itemStyle={globalStyles.inputText}
         >
-          <Picker.Item label={placeholder} value="" />
+          <Picker.Item label={placeholder} value=""/>
           {options.map((option, index) => (
             <Picker.Item key={index} label={option.label} value={option.value} />
           ))}
@@ -37,15 +41,18 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 5,
-    color: '#333',
+    color: colores.primary,
   },
   picker: {
-    height: 50,
+    height: 40,
     width: '100%',
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
+    borderColor: colores.primary,
+    elevation: 5,
+    borderRadius: 20,
     paddingHorizontal: 10,
+    display: 'grid',
+    justifyContent: 'center',
+    backgroundColor: colores.background
   },
   pickerError: {
     borderColor: 'red',

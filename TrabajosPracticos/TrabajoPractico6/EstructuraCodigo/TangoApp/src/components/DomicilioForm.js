@@ -3,6 +3,8 @@ import { View, StyleSheet, Text } from 'react-native';
 import CustomSelect from './CustomSelect';
 import CustomInput from './CustomInput';
 import apiClient from '../services/apiClient';
+import colores from '../styles/colores';
+import globalStyles from '../styles/globalStyles';
 
 const DomicilioForm = ({ domicilio, setDomicilio, label, provinces, error }) => {
   const [selectedProvince, setSelectedProvince] = useState('');
@@ -30,7 +32,7 @@ const DomicilioForm = ({ domicilio, setDomicilio, label, provinces, error }) => 
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.label}>{label}</Text>
       <CustomInput
         label="Calle"
@@ -74,13 +76,11 @@ const DomicilioForm = ({ domicilio, setDomicilio, label, provinces, error }) => 
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 10,
-  },
   label: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#03045E',
   },
 });
 

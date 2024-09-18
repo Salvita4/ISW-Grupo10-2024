@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
+import colores from '../styles/colores';
 
 const CustomInput = ({ label, value, onChangeText, placeholder, error, secureTextEntry, onErrorClear, keyboardType = 'text'}) => {
   const handleChangeText = (text) => {
@@ -19,6 +20,7 @@ const CustomInput = ({ label, value, onChangeText, placeholder, error, secureTex
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
+        placeholderTextColor={'black'}
       />
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
@@ -32,13 +34,15 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 5,
-    color: '#333',
+    color: colores.primary,
   },
   input: {
     height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
+    borderColor: colores.primary,
+    // borderWidth: 1,
+    borderRadius: 20,
+    elevation: 5,
+    backgroundColor: colores.background,
     paddingHorizontal: 10,
   },
   inputError: {
