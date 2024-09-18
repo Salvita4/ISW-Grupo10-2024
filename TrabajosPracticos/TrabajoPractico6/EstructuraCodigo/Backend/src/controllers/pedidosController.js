@@ -4,6 +4,7 @@ module.exports = {
 getAllPedidos: async (req,res)=>{
     try {
         const pedidos = await pedidosOrm.getAll();
+        console.log(pedidos)
         res.status(200).json(pedidos);
     } catch (error) {
         res.status(500).json({error: 'Error al obtener los pedidos.'});

@@ -18,13 +18,12 @@ const errorMiddleware = require("./middlewares/errorMiddleware");
 
 // Middleware para parsear JSON
 app.use(express.json());
-// Middelware CORS
-app.use(
-    cors({
-        origin: "http://localhost:3000",
-        credentials: true,
-    })
-);
+
+app.use(cors({
+    origin: 'http://localhost:3000', // Si tu frontend corre en este puerto
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));  
 
 // Rutas para cada colección
 app.use("/api", routes);

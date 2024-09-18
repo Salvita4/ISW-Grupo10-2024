@@ -12,27 +12,32 @@ const RegistrarPedidoEnvioScreen = () => {
   const [domicilioRetiro, setDomicilioRetiro] = useState({
     calle: '',
     numero: '',
-    provincia: '',
-    localidad: '',
+    id_provincia: '',
+    id_localidad: '',
     referencia: ''
   });
   const [domicilioEntrega, setDomicilioEntrega] = useState({
     calle: '',
     numero: '',
-    provincia: '',
-    localidad: '',
+    id_provincia: '',
+    id_localidad: '',
     referencia: ''
   });
   const [fechaRetiro, setFechaRetiro] = useState(new Date());
   const [fechaEntrega, setFechaEntrega] = useState(new Date());
-  const [images, setImages] = useState([]);
-  const [provinces, setProvinces] = useState([]);
+  const [imagenes, setImagenes] = useState([]);
+  const [provincias, setProvincias] = useState([]);
   const [errors, setErrors] = useState({});
+  const [tipoCargaOptions, setTipoCargaOptions] = useState([]);
 
   useEffect(() => {
-    // Fetch provinces once when the component mounts
-    apiClient.get('/provincias').then((response) => {
-      setProvinces(response.data);
+    apiClient.get('/soporte/TiposCarga').then((response) => {
+      setTipoCargaOptions(response.data);
+    });
+
+    // Fetch provincias once when the component mounts
+    apiClient.get('/soporte/Provincias').then((response) => {
+      setProvincias(response.data);
     });
   }, []);
 
@@ -54,11 +59,11 @@ const RegistrarPedidoEnvioScreen = () => {
       errors.domicilioRetiroNumero = "El número es requerido";
       valid = false;
     }
-    if (!domicilioRetiro.localidad) {
+    if (!domicilioRetiro.id_localidad) {
       errors.domicilioRetiroLocalidad = "La localidad es requerida";
       valid = false;
     }
-    if (!domicilioRetiro.provincia) {
+    if (!domicilioRetiro.id_provincia) {
       errors.domicilioRetiroProvincia = "La provincia es requerida";
       valid = false;
     }
@@ -72,11 +77,11 @@ const RegistrarPedidoEnvioScreen = () => {
       errors.domicilioEntregaNumero = "El número es requerido";
       valid = false;
     }
-    if (!domicilioEntrega.localidad) {
+    if (!domicilioEntrega.id_localidad) {
       errors.domicilioEntregaLocalidad = "La localidad es requerida";
       valid = false;
     }
-    if (!domicilioEntrega.provincia) {
+    if (!domicilioEntrega.id_provincia) {
       errors.domicilioEntregaProvincia = "La provincia es requerida";
       valid = false;
     }
@@ -88,27 +93,28 @@ const RegistrarPedidoEnvioScreen = () => {
   const handleSubmit = async () => {
     if (validateForm()) {
       try {
+        console.log({
+          tipoCarga,
+          domicilioRetiro,
+          fechaRetiro,
+          domicilioEntrega,
+          fechaEntrega,
+          imagenes,
+        });
         const response = await apiClient.post('/pedidos', {
           tipoCarga,
           domicilioRetiro,
           fechaRetiro,
           domicilioEntrega,
           fechaEntrega,
-          images,
+          imagenes,
         });
-        console.log(response.data);
+      
       } catch (error) {
         console.error(error);
       }
     }
   };
-
-  const tipoCargaOptions = [
-    { label: "Documentación", value: "documentacion" },
-    { label: "Paquete", value: "paquete" },
-    { label: "Granos", value: "granos" },
-    { label: "Hacienda", value: "hacienda" },
-  ];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -126,7 +132,7 @@ const RegistrarPedidoEnvioScreen = () => {
         domicilio={domicilioRetiro}
         setDomicilio={setDomicilioRetiro}
         label="Domicilio de Retiro"
-        provinces={provinces}
+        provincias={provincias}
         error={{
           calle: errors.domicilioRetiroCalle,
           numero: errors.domicilioRetiroNumero,
@@ -146,7 +152,7 @@ const RegistrarPedidoEnvioScreen = () => {
         domicilio={domicilioEntrega}
         setDomicilio={setDomicilioEntrega}
         label="Domicilio de Entrega"
-        provinces={provinces}
+        provincias={provincias}
         error={{
           calle: errors.domicilioEntregaCalle,
           numero: errors.domicilioEntregaNumero,
@@ -162,7 +168,7 @@ const RegistrarPedidoEnvioScreen = () => {
         error={errors.fechaEntrega}
       />
 
-      <CustomImagePicker images={images} setImages={setImages} />
+      <CustomImagePicker imagenes={imagenes} setImagenes={setImagenes} />
 
       <CustomButton title="Publicar Pedido" onPress={handleSubmit} />
     </ScrollView>
