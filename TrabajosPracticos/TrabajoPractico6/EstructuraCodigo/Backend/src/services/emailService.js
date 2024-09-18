@@ -20,6 +20,7 @@ module.exports = {
             let transportistasRetiro = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
             let transportistasEntrega = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
             let transportistas = transportistasRetiro.concat(transportistasEntrega);
+            let transportistasSinDuplicar = transportistas.filter((transportista, index) => transportistas.indexOf(transportista) === index); // Eliminar duplicados
             let tipoCarga = await soporteOrm.getAll("TiposCarga");
             tipoCarga = tipoCarga.filter((tipo) => tipo.id === pedido.tipoCarga)[0].nombre;        
             let calleRetiro = pedido.domicilioRetiro.calle;
@@ -60,7 +61,7 @@ module.exports = {
                 };
             });
             
-            transportistas.forEach((transportista) => {
+            transportistasSinDuplicar.forEach((transportista) => {
                 transporter.sendMail({
                     from: "nikitolima123456789@gmail.com",
                     to: transportista.email,
