@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // O el conjunto de iconos que prefieras
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import colores from '../styles/colores';
 
 const HomeScreen = ({ navigation }) => {
@@ -8,7 +8,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
 
       <Image
-        source={require('../../assets/splash.png')}  // Asegúrate de que la ruta sea correcta
+        source={require('../../assets/splash.png')} 
         style={styles.logo}
       />
 

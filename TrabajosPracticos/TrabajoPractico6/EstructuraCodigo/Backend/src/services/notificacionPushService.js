@@ -14,16 +14,22 @@ const sendPushNotification = async (expoPushToken, message) => {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Accept-encoding': 'gzip, deflate',
+        'Accept-Encoding': 'gzip, deflate',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     });
 
+    if (!response.ok) {
+      // Manejar errores HTTP
+      const error = await response.text();
+      throw new Error(`HTTP error! Status: ${response.status}. Details: ${error}`);
+    }
+
     const result = await response.json();
     console.log('Push notification sent successfully:', result);
   } catch (error) {
-    console.error('Error sending push notification:', error);
+    console.error('Error sending push notification:', error.message);
   }
 };
 

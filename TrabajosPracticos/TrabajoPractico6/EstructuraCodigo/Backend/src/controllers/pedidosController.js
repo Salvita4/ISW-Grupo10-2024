@@ -48,32 +48,39 @@ getAllPedidos: async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener los pedidos.' });
     }
-    },
+},
 createPedido: async (req, res) => {
     try {
         const newPedido = req.body;
         const expoPushToken = newPedido.expoPushToken;  // Asegúrate de obtener el token desde el request
-
+    
         // Insertar el pedido en la base de datos
         await pedidosOrm.insert(newPedido);
-
+    
         // Enviar el correo electrónico
         await emailService.sendEmail('Nuevo pedido en la zona', newPedido);
-
+    
         // Enviar notificación push
         if (expoPushToken) {
-        await notificacionPushService.sendPushNotification(expoPushToken, {
-            title: 'Pedido creado',
-            body: 'Tu pedido ha sido registrado exitosamente.',
-            data: { pedidoId: newPedido.id },
+            console.log(expoPushToken)
+            console.log({
+                title: 'Pedido creado',
+                body: 'Tu pedido ha sido registrado exitosamente.',
+                data: { pedidoId: newPedido._id },
+        })
+            await notificacionPushService.sendPushNotification(expoPushToken, {
+                title: 'Pedido creado',
+                body: 'Tu pedido ha sido registrado exitosamente.',
+                data: { pedidoId: newPedido._id },
         });
         }
-
+    
         res.status(201).json({ message: 'Pedido creado exitosamente.' });
     } catch (error) {
+        console.error('Error en createPedido:', error);
         res.status(500).send({ error: 'Error al crear el pedido.' });
     }
-    },
+},      
 getPedidoById: async (req,res)=>{
     try {
         const pedidoId = req.params.id;

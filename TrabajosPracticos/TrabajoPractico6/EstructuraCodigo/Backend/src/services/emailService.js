@@ -18,7 +18,7 @@ module.exports = {
         });
         try {
             let transportistasRetiro = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
-            let transportistasEntrega = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
+            let transportistasEntrega = await getTransportistasByLocalidad(pedido.domicilioEntrega.id_localidad);
             let transportistas = transportistasRetiro.concat(transportistasEntrega);
             let tipoCarga = await soporteOrm.getAll("TiposCarga");
             tipoCarga = tipoCarga.filter((tipo) => tipo.id === pedido.tipoCarga)[0].nombre;        
@@ -47,18 +47,18 @@ module.exports = {
             Fecha de Entrega: ${fechaEntrega} \n
             TangoApp®`;     
             
-            // Procesar las imágenes en base64
-            let attachments = pedido.imagenes.map((imagenBase64, index) => {
-                // Detectar el tipo de imagen basado en el encabezado
-                let mimeType = imagenBase64.match(/data:(image\/[a-zA-Z]+);base64,/);
-                let extension = mimeType ? mimeType[1].split("/")[1] : "jpeg"; // Si no se encuentra, usar "jpeg" por defecto
+            // // Procesar las imágenes en base64
+            // let attachments = pedido.imagenes.map((imagenBase64, index) => {
+            //     // Detectar el tipo de imagen basado en el encabezado
+            //     let mimeType = imagenBase64.match(/data:(image\/[a-zA-Z]+);base64,/);
+            //     let extension = mimeType ? mimeType[1].split("/")[1] : "jpeg"; // Si no se encuentra, usar "jpeg" por defecto
 
-                return {
-                    filename: `imagen${index + 1}.${extension}`,  // Asigna la extensión correspondiente
-                    content: imagenBase64.split("base64,")[1],    // Remover el encabezado data:image/...;base64,
-                    encoding: 'base64'
-                };
-            });
+            //     return {
+            //         filename: `imagen${index + 1}.${extension}`,  // Asigna la extensión correspondiente
+            //         content: imagenBase64.split("base64,")[1],    // Remover el encabezado data:image/...;base64,
+            //         encoding: 'base64'
+            //     };
+            // });
             
             transportistas.forEach((transportista) => {
                 transporter.sendMail({
@@ -66,7 +66,7 @@ module.exports = {
                     to: transportista.email,
                     subject: asunto,
                     text: cuerpo,
-                    attachments: attachments 
+                    // attachments: attachments 
                 });
             });
             console.log("Email enviado");

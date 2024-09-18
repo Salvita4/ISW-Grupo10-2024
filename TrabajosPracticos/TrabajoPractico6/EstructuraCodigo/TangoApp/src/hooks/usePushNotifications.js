@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import AppNavigator from './src/navigation/AppNavigator';
-import { StatusBar, Alert } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
+import { Platform } from 'react-native';
 
-const App = () => {
+export default usePushNotifications = () => {
   const [expoPushToken, setExpoPushToken] = useState('');
-  const [notification, setNotification] = useState(null);
-  const notificationListener = React.useRef();
-  const responseListener = React.useRef();
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
   useEffect(() => {
+    // Solicitar permisos para notificaciones
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
+    // Escuchar cuando llega una notificación
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
       console.log('Notificación recibida: ', notification);
-      setNotification(notification);
     });
 
+    // Escuchar cuando el usuario interactúa con una notificación
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
       console.log('Notificación interactuada: ', response);
-      Alert.alert('Notificación', `Título: ${response.notification.request.content.title}\nMensaje: ${response.notification.request.content.body}`);
     });
 
     return () => {
@@ -30,19 +28,10 @@ const App = () => {
     };
   }, []);
 
-  return (
-    <NavigationContainer>
-      <StatusBar 
-        backgroundColor="transparent" 
-        barStyle="dark-content" 
-        translucent={true}
-      />
-      <AppNavigator />
-    </NavigationContainer>
-  );
-};
+  return expoPushToken;
+}
 
-async function registerForPushNotificationsAsync() {
+const registerForPushNotificationsAsync = async () => {
   let token;
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync('default', {
@@ -66,9 +55,11 @@ async function registerForPushNotificationsAsync() {
     return;
   }
 
-  token = (await Notifications.getExpoPushTokenAsync()).data;
+  // Aquí debes incluir el projectId
+  token = (await Notifications.getExpoPushTokenAsync({
+    projectId: '58bea572-f1f5-4ad4-b795-d80c03933353',
+  })).data;
+
   console.log('Expo Push Token:', token);
   return token;
-}
-
-export default App;
+};

@@ -8,8 +8,10 @@ import CustomDatePicker from '../components/CustomDatePicker';
 import DomicilioForm from '../components/DomicilioForm';
 import globalStyles from '../styles/globalStyles';
 import colores from '../styles/colores';
+import usePushNotifications from '../hooks/usePushNotifications';
 
 const RegistrarPedidoEnvioScreen = () => {
+  const expoPushToken = usePushNotifications();
   const [tipoCarga, setTipoCarga] = useState("");
   const [domicilioRetiro, setDomicilioRetiro] = useState({
     calle: '',
@@ -125,6 +127,7 @@ const RegistrarPedidoEnvioScreen = () => {
           domicilioEntrega,
           fechaEntrega,
           imagenes,
+          expoPushToken
         });
         const response = await apiClient.post('/pedidos', {
           tipoCarga,
@@ -133,6 +136,7 @@ const RegistrarPedidoEnvioScreen = () => {
           domicilioEntrega,
           fechaEntrega,
           imagenes,
+          expoPushToken 
         });
       
       } catch (error) {
