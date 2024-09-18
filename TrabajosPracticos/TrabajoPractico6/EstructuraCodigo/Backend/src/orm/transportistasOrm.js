@@ -5,7 +5,7 @@ module.exports = {
         try {
             const db = await conectarMongoDB();
             const collection = db.collection("Transportistas");
-            const resultado = await collection.find({id_localidad: id_localidad}).toArray();
+            const resultado = await collection.find({id_localidad: parseInt(id_localidad)}).toArray();
             return resultado;
         } catch (error) {
             console.log("Error al obtener los registros:", error);
