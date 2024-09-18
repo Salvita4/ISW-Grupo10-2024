@@ -1,63 +1,109 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, ActivityIndicator } from 'react-native';
-import apiClient from '../services/apiClient'; // Importar cliente Axios configurado
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import apiClient from '../services/apiClient';
 
-const ConsultarPedidoScreen = () => {
-  const [pedidoId, setPedidoId] = useState(''); // Identificador del pedido
-  const [pedido, setPedido] = useState(null); // Estado para almacenar la respuesta del pedido
-  const [loading, setLoading] = useState(false); // Indicador de carga
-  const [error, setError] = useState(null); // Estado para manejar errores
+const ConsultarPedidosEnviosScreen = () => {
+  const [pedidosEnvios, setPedidosEnvios] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Función para manejar la consulta de un pedido
-  const consultarPedido = async () => {
-    if (!pedidoId) {
-      alert('Por favor, ingresa el ID del pedido');
-      return;
-    }
+  // Función para obtener los pedidosEnvios
+  useEffect(() => {
+    const fetchPedidosEnvios = async () => {
+      try {
+        const response = await apiClient.get('/pedidos');
+        console.log(response)
+        setPedidosEnvios(response.data); // Asigna los datos obtenidos al estado
+      } catch (error) {
+        setError('Error al cargar los pedidos');
+        console.error(error);
+      } finally {
+        setLoading(false); // Detener el estado de carga una vez que los datos se obtienen
+      }
+    };
 
-    try {
-      setLoading(true); // Mostrar spinner mientras carga
-      const response = await apiClient.get(`/pedidos/${pedidoId}`); // Petición GET
-      setPedido(response.data); // Guardar los datos del pedido en el estado
-      setError(null); // Limpiar cualquier error previo
-    } catch (err) {
-      setError('No se pudo consultar el pedido. Por favor, intenta nuevamente.');
-      setPedido(null); // Limpiar los datos del pedido si hay un error
-    } finally {
-      setLoading(false); // Ocultar spinner al finalizar
-    }
-  };
+    fetchPedidosEnvios(); // Llamar a la función para obtener los pedidos al montar el componente
+  }, []);
 
+  // Renderizar cada item de la lista
+  const renderPedidoItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Text style={styles.itemTitle}>Pedido ID: {item._id}</Text>
+      <Text>Tipo de carga: {item.tipoCarga}</Text>
+      <Text>Retiro: {item.domicilioRetiro.calle}, {item.domicilioRetiro.numero}, {item.domicilioRetiro.localidad}, {item.domicilioRetiro.provincia}</Text>
+      <Text>Entrega: {item.domicilioEntrega.calle}, {item.domicilioRetiro.numero}, {item.domicilioEntrega.localidad}, {item.domicilioRetiro.provincia}</Text>
+      <Text>Fecha de Retiro: {new Date(item.fechaRetiro).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</Text>
+      <Text>Fecha de Entrega: {new Date(item.fechaEntrega).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' })}</Text>
+    </View>
+  );
+
+  // Pantalla de carga
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>Cargando pedidos...</Text>
+      </View>
+    );
+  }
+
+  // Pantalla de error
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>{error}</Text>
+      </View>
+    );
+  }
+
+  // Pantalla de lista
   return (
-    <View>
-      <TextInput
-        placeholder="ID del Pedido"
-        value={pedidoId}
-        onChangeText={setPedidoId}
-        style={{ borderWidth: 1, padding: 10, marginBottom: 10 }}
+    <View style={styles.container}>
+      <FlatList
+        data={pedidosEnvios}
+        renderItem={renderPedidoItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContainer}
       />
-
-      <Button title="Consultar Pedido" onPress={consultarPedido} />
-
-      {loading && <ActivityIndicator size="large" color="#0000ff" />}
-
-      {error && <Text style={{ color: 'red', marginTop: 10 }}>{error}</Text>}
-
-      {pedido && (
-        <View style={{ marginTop: 20 }}>
-          <Text>ID del Pedido: {pedido.id}</Text>
-          <Text>Tipo de Carga: {pedido.tipoCarga}</Text>
-          <Text>Domicilio de Retiro: {pedido.domicilioRetiro}</Text>
-          <Text>Fecha de Retiro: {new Date(pedido.fechaRetiro).toLocaleDateString()}</Text>
-          <Text>Domicilio de Entrega: {pedido.domicilioEntrega}</Text>
-          <Text>Fecha de Entrega: {new Date(pedido.fechaEntrega).toLocaleDateString()}</Text>
-          {pedido.image && (
-            <Image source={{ uri: pedido.image }} style={{ width: 200, height: 200 }} />
-          )}
-        </View>
-      )}
     </View>
   );
 };
 
-export default ConsultarPedidoScreen;
+// Estilos
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  listContainer: {
+    flexGrow: 1,
+  },
+  itemContainer: {
+    backgroundColor: '#fff',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 3,
+  },
+  itemTitle: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default ConsultarPedidosEnviosScreen;

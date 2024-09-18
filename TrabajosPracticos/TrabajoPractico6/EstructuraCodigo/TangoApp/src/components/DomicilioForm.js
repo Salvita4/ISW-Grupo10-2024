@@ -6,7 +6,7 @@ import apiClient from '../services/apiClient';
 import colores from '../styles/colores';
 import globalStyles from '../styles/globalStyles';
 
-const DomicilioForm = ({ domicilio, setDomicilio, label, provinces, error }) => {
+const DomicilioForm = ({ domicilio, setDomicilio, label, provincias, error }) => {
   const [selectedProvince, setSelectedProvince] = useState('');
   const [selectedLocality, setSelectedLocality] = useState('');
   const [localities, setLocalities] = useState([]);
@@ -14,22 +14,25 @@ const DomicilioForm = ({ domicilio, setDomicilio, label, provinces, error }) => 
   useEffect(() => {
     if (domicilio.provincia !== selectedProvince) {
       setSelectedProvince(domicilio.provincia);
+    }
+    if (domicilio.localidad !== selectedLocality) {
       setSelectedLocality(domicilio.localidad);
     }
-  }, [domicilio.provincia]);
+  }, [domicilio.provincia, domicilio.localidad]);  
 
   const handleProvinceChange = (province) => {
     setSelectedProvince(province);
     setDomicilio((prev) => ({
       ...prev,
       provincia: province,
-      localidad: '', // Reset locality when province changes
+      localidad: '', // Reset localidad cuando cambia la provincia
     }));
-    // Fetch localities based on the selected province
-    apiClient.get(`/localidades?provincia=${province}`).then((response) => {
-      setLocalities(response.data);
+  
+    // Fetch localities basado en la provincia seleccionada correctamente
+    apiClient.get('/soporte/Localidades').then((response) => {
+      setLocalities(response.data.filter((e) => e.id_provincia === province));
     });
-  };
+  };  
 
   return (
     <View>
@@ -52,7 +55,7 @@ const DomicilioForm = ({ domicilio, setDomicilio, label, provinces, error }) => 
       <CustomSelect
         selectedValue={selectedProvince}
         onValueChange={handleProvinceChange}
-        options={provinces}
+        options={provincias}
         label="Provincia"
         placeholder="Seleccione una provincia"
         error={error?.provincia}

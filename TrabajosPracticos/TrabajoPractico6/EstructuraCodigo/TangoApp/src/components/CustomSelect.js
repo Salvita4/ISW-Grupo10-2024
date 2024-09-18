@@ -24,8 +24,8 @@ const CustomSelect = ({ label, selectedValue, onValueChange, options, placeholde
           itemStyle={globalStyles.inputText}
         >
           <Picker.Item label={placeholder} value=""/>
-          {options.map((option, index) => (
-            <Picker.Item key={index} label={option.label} value={option.value} />
+          {options?.map((option, index) => (
+            <Picker.Item key={index} label={option.nombre} value={option.id} />
           ))}
         </Picker>
       </View>

@@ -4,6 +4,7 @@ module.exports = {
 getAllPedidos: async (req,res)=>{
     try {
         const pedidos = await pedidosOrm.getAll();
+        console.log(pedidos)
         res.status(200).json(pedidos);
     } catch (error) {
         res.status(500).json({error: 'Error al obtener los pedidos.'});
@@ -13,7 +14,7 @@ createPedido: async (req,res)=>{
     try {
         const newPedido = req.body;
         await pedidosOrm.insert(newPedido);
-        await emailService.sendEmail('Pedido creado', 'Su pedido ha sido creado exitosamente.', newPedido.direccion_origen.id_localidad_origen);
+        await emailService.sendEmail('Nuevo pedido en la zona', newPedido);
         res.status(201).json({message: 'Pedido creado exitosamente.'});
     } catch (error) {
         res.status(500).send({error: 'Error al crear el pedido.'});

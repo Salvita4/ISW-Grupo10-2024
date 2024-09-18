@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8300/api',
+  baseURL: 'http://10.0.2.2:8300/api',
   timeout: 10000, // Tiempo máximo de espera para una petición (en milisegundos)
   headers: {
     'Content-Type': 'application/json',
@@ -21,12 +21,18 @@ apiClient.interceptors.request.use(
 );
 
 apiClient.interceptors.response.use(
-  response => {
-    return response;
-  },
+  response => response,
   error => {
-    // Manejo global de errores
-    console.error('Error en la respuesta:', error);
+    if (error.response) {
+      // El servidor respondió con un código de estado fuera del rango de 2xx
+      console.error('Error en la respuesta del servidor:', error.response.data);
+    } else if (error.request) {
+      // La solicitud fue enviada pero no hubo respuesta
+      console.error('No hubo respuesta del servidor:', error.request);
+    } else {
+      // Algo sucedió al configurar la solicitud
+      console.error('Error al configurar la solicitud:', error.message);
+    }
     return Promise.reject(error);
   }
 );
