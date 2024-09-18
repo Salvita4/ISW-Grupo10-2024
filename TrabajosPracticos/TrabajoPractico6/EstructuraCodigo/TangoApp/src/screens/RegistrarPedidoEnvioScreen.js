@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import apiClient from '../services/apiClient';
 import CustomSelect from '../components/CustomSelect';
 import CustomButton from '../components/CustomButton';
@@ -9,6 +9,7 @@ import DomicilioForm from '../components/DomicilioForm';
 import globalStyles from '../styles/globalStyles';
 import colores from '../styles/colores';
 import usePushNotifications from '../hooks/usePushNotifications';
+import Toast from 'react-native-toast-message';
 
 const RegistrarPedidoEnvioScreen = () => {
   const expoPushToken = usePushNotifications();
@@ -138,7 +139,32 @@ const RegistrarPedidoEnvioScreen = () => {
           imagenes,
           expoPushToken 
         });
-      
+
+        const showToast = () => {
+          Toast.show({
+            type: 'success', 
+            position: 'top',
+            text1: '¡Nuevo Pedido!',
+            text2: '¡Hay un nuevo pedido! Ingrese a su aplicativo para ver más info.',
+            bottomOffset: 40,
+            text1Style: styles.text1,
+            text2Style: styles.text2,
+            style: styles.toastContainer,
+          });
+        };
+
+        const showAlert = () => {
+          Alert.alert(
+            '¡Nuevo Pedido!', // Título del Alert
+            '¡Hay un nuevo pedido! Ingrese a su aplicativo para ver más info. Asegúrese de revisar todos los detalles importantes para no perder ninguna información crítica del pedido.',
+            [
+              { text: 'OK', onPress: () => console.log('OK Pressed') }, // Botón para cerrar el Alert
+            ],
+            { cancelable: false } // Evita que se cierre al tocar fuera del Alert
+          );
+        };
+
+        showAlert();
       } catch (error) {
         console.error(error);
       }
@@ -217,6 +243,22 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 20,
     backgroundColor: colores.background,
+  },
+  text1: {
+    fontSize: 20, // Ajusta el tamaño del texto principal
+    fontWeight: 'bold',
+  },
+  text2: {
+    fontSize: 16, // Ajusta el tamaño del texto secundario
+    color: 'gray',
+  },
+  toastContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 10,
+    backgroundColor: '#333',
+    marginHorizontal: 20, // Agrega margen horizontal
+    width: '90%', // Ajusta el ancho del Toast
   },
 });
 
