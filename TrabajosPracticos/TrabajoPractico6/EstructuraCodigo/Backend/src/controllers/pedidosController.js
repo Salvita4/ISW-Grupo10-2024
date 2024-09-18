@@ -13,7 +13,7 @@ getAllPedidos: async (req,res)=>{
 createPedido: async (req,res)=>{
     try {
         const newPedido = req.body;
-        //await pedidosOrm.insert(newPedido);
+        await pedidosOrm.insert(newPedido);
         await emailService.sendEmail('Nuevo pedido en la zona', newPedido);
         res.status(201).json({message: 'Pedido creado exitosamente.'});
     } catch (error) {
