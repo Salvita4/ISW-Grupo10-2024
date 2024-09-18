@@ -20,6 +20,8 @@ module.exports = {
             let transportistasRetiro = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
             let transportistasEntrega = await getTransportistasByLocalidad(pedido.domicilioEntrega.id_localidad);
             let transportistas = transportistasRetiro.concat(transportistasEntrega);
+            let transportistasSinDuplicar = transportistas.filter((transportista, index, self) => index === self.findIndex(t => t.id_transportista === transportista.id_transportista)); // Eliminar duplicados
+            console.log(transportistasSinDuplicar);
             let tipoCarga = await soporteOrm.getAll("TiposCarga");
             tipoCarga = tipoCarga.filter((tipo) => tipo.id === pedido.tipoCarga)[0].nombre;        
             let calleRetiro = pedido.domicilioRetiro.calle;
@@ -45,7 +47,8 @@ module.exports = {
             Domicilio de Entrega: ${calleEntrega} ${numeroEntrega}, ${localidadEntrega}, ${provinciaEntrega}, ${referenciaEntrega && 'Referencia: ' + referenciaEntrega} \n
             Fecha de Retiro: ${fechaRetiro} \n
             Fecha de Entrega: ${fechaEntrega} \n
-            TangoApp®`;     
+            TangoApp®`; 
+            
             
             // // Procesar las imágenes en base64
             // let attachments = pedido.imagenes.map((imagenBase64, index) => {
@@ -60,7 +63,7 @@ module.exports = {
             //     };
             // });
             
-            transportistas.forEach((transportista) => {
+            transportistasSinDuplicar.forEach((transportista) => {
                 transporter.sendMail({
                     from: "nikitolima123456789@gmail.com",
                     to: transportista.email,
