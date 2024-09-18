@@ -17,7 +17,9 @@ module.exports = {
             },
         });
         try {
-            let transportistas = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
+            let transportistasRetiro = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
+            let transportistasEntrega = await getTransportistasByLocalidad(pedido.domicilioRetiro.id_localidad);
+            let transportistas = transportistasRetiro.concat(transportistasEntrega);
             let tipoCarga = await soporteOrm.getAll("TiposCarga");
             tipoCarga = tipoCarga.filter((tipo) => tipo.id === pedido.tipoCarga)[0].nombre;        
             let calleRetiro = pedido.domicilioRetiro.calle;
