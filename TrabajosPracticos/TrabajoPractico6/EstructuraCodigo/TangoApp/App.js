@@ -13,7 +13,7 @@ const App = () => {
         translucent={true}
       />
       <AppNavigator />
-      <Toast ref={(ref) => Toast.setRef(ref)} />
+      {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
     </NavigationContainer>
   );
 };

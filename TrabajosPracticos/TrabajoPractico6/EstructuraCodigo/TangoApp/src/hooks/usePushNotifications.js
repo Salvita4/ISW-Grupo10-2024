@@ -4,31 +4,31 @@ import * as Permissions from 'expo-permissions';
 import { Platform } from 'react-native';
 
 export default usePushNotifications = () => {
-  const [expoPushToken, setExpoPushToken] = useState('');
-  const notificationListener = useRef();
-  const responseListener = useRef();
+  // const [expoPushToken, setExpoPushToken] = useState('');
+  // const notificationListener = useRef();
+  // const responseListener = useRef();
 
-  useEffect(() => {
-    // Solicitar permisos para notificaciones
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+  // useEffect(() => {
+  //   // Solicitar permisos para notificaciones
+  //   registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
-    // Escuchar cuando llega una notificación
-    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      console.log('Notificación recibida: ', notification);
-    });
+  //   // Escuchar cuando llega una notificación
+  //   notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+  //     console.log('Notificación recibida: ', notification);
+  //   });
 
-    // Escuchar cuando el usuario interactúa con una notificación
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log('Notificación interactuada: ', response);
-    });
+  //   // Escuchar cuando el usuario interactúa con una notificación
+  //   responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+  //     console.log('Notificación interactuada: ', response);
+  //   });
 
-    return () => {
-      Notifications.removeNotificationSubscription(notificationListener.current);
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
+  //   return () => {
+  //     Notifications.removeNotificationSubscription(notificationListener.current);
+  //     Notifications.removeNotificationSubscription(responseListener.current);
+  //   };
+  // }, []);
 
-  return expoPushToken;
+  // return expoPushToken;
 }
 
 const registerForPushNotificationsAsync = async () => {

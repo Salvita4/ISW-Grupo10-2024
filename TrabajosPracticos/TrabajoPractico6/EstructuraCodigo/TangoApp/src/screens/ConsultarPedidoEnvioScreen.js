@@ -3,7 +3,6 @@ import { View, Text, FlatList, StyleSheet, ScrollView, Image } from 'react-nativ
 import apiClient from '../services/apiClient';
 import globalStyles from '../styles/globalStyles';
 import colores from '../styles/colores';
-import { sendTestNotification } from '../services/pedidoEnvioService';
 
 const ConsultarPedidosEnviosScreen = () => {
   const [pedidosEnvios, setPedidosEnvios] = useState([]);
@@ -14,7 +13,6 @@ const ConsultarPedidosEnviosScreen = () => {
   useEffect(() => {
     const fetchPedidosEnvios = async () => {
       try {
-        sendTestNotification();
         const response = await apiClient.get('/pedidos');
         setPedidosEnvios(response.data); // Asigna los datos obtenidos al estado
       } catch (error) {

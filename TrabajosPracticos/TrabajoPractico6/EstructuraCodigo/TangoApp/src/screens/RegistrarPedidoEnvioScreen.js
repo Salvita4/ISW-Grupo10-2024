@@ -8,11 +8,11 @@ import CustomDatePicker from '../components/CustomDatePicker';
 import DomicilioForm from '../components/DomicilioForm';
 import globalStyles from '../styles/globalStyles';
 import colores from '../styles/colores';
-import usePushNotifications from '../hooks/usePushNotifications';
-import Toast from 'react-native-toast-message';
+// import usePushNotifications from '../hooks/usePushNotifications';
+// import Toast from 'react-native-toast-message';
 
 const RegistrarPedidoEnvioScreen = () => {
-  const expoPushToken = usePushNotifications();
+  // const expoPushToken = usePushNotifications();
   const [tipoCarga, setTipoCarga] = useState("");
   const [domicilioRetiro, setDomicilioRetiro] = useState({
     calle: '',
@@ -121,50 +121,70 @@ const RegistrarPedidoEnvioScreen = () => {
   const handleSubmit = async () => {
     if (validateForm()) {
       try {
-        console.log({
+        // console.log({
+        //   tipoCarga,
+        //   domicilioRetiro,
+        //   fechaRetiro,
+        //   domicilioEntrega,
+        //   fechaEntrega,
+        //   imagenes,
+        //   expoPushToken
+        // });
+        await apiClient.post('/pedidos', {
           tipoCarga,
           domicilioRetiro,
           fechaRetiro,
           domicilioEntrega,
           fechaEntrega,
           imagenes,
-          expoPushToken
-        });
-        const response = await apiClient.post('/pedidos', {
-          tipoCarga,
-          domicilioRetiro,
-          fechaRetiro,
-          domicilioEntrega,
-          fechaEntrega,
-          imagenes,
-          expoPushToken 
-        });
+          //expoPushToken 
+        }).then((res) => {
+          const showAlert = () => {
+            Alert.alert(
+              '¡Nuevo Pedido!', // Título del Alert
+              '¡Hay un nuevo pedido! Ingrese a su aplicativo para ver más info. Asegúrese de revisar todos los detalles importantes para no perder ninguna información crítica del pedido.',
+              [
+                { text: 'OK', onPress: () => console.log('OK Pressed') }, // Botón para cerrar el Alert
+              ],
+              { cancelable: false } // Evita que se cierre al tocar fuera del Alert
+            );
+          };
 
-        const showToast = () => {
-          Toast.show({
-            type: 'success', 
-            position: 'top',
-            text1: '¡Nuevo Pedido!',
-            text2: '¡Hay un nuevo pedido! Ingrese a su aplicativo para ver más info.',
-            bottomOffset: 40,
-            text1Style: styles.text1,
-            text2Style: styles.text2,
-            style: styles.toastContainer,
-          });
-        };
-
-        const showAlert = () => {
+          if (res?.status === 201) {
+            showAlert();
+          } else {
+            Alert.alert(
+              'Oops :(', // Título del Alert
+              'Ha ocurrido un error.',
+              [
+                { text: 'OK', onPress: () => console.log('OK Pressed') }, // Botón para cerrar el Alert
+              ],
+              { cancelable: false } // Evita que se cierre al tocar fuera del Alert
+            );
+          }
+        }).catch(() => {
           Alert.alert(
-            '¡Nuevo Pedido!', // Título del Alert
-            '¡Hay un nuevo pedido! Ingrese a su aplicativo para ver más info. Asegúrese de revisar todos los detalles importantes para no perder ninguna información crítica del pedido.',
+            'Oops :(', // Título del Alert
+            'Ha ocurrido un error.',
             [
               { text: 'OK', onPress: () => console.log('OK Pressed') }, // Botón para cerrar el Alert
             ],
             { cancelable: false } // Evita que se cierre al tocar fuera del Alert
           );
-        };
+        });
 
-        showAlert();
+        // const showToast = () => {
+        //   Toast.show({
+        //     type: 'success', 
+        //     position: 'top',
+        //     text1: '¡Nuevo Pedido!',
+        //     text2: '¡Hay un nuevo pedido! Ingrese a su aplicativo para ver más info.',
+        //     bottomOffset: 40,
+        //     text1Style: styles.text1,
+        //     text2Style: styles.text2,
+        //     style: styles.toastContainer,
+        //   });
+        //};
       } catch (error) {
         console.error(error);
       }
