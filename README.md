@@ -16,6 +16,13 @@ git clone https://github.com/Salvita4/ISW-Grupo10-2024.git
 cd ISW-Grupo10-2024
 
 *Siempre hacer pull o clonar el repo en una nueva carpeta*
+
+------> COMO PULLEAR UNA RAMA:
+git pull origin NombreRamaRemota NombreRamaLocal  --Pullea la rama remota en una rama local
+git checkout NombreRamaLocal --Me traslado a la rama local recien pulleada
+
+------> CUANDO SE PULLEA UN TP PROGRAMABLE:
+- ejecturar en la terminal: npm insstall  --Instala todas las dependencias.
 ```
 
 ## Criterio/Linea/Base
@@ -38,7 +45,7 @@ La linea base será actualizada cada vez que se tengan los items de configuraci�
 | Producciones para investigación      | PROD-TPINV&lt;N&gt;-&lt;Tema&gt;.&lt;extension&gt;                                          | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main/TrabajosConceptuales/TrabajoPracticoConceptual[N]-[Tema]/Producciones               |
 | Guía de ejercicios resueltos         | ISW_Guia de Trabajos Practicos Resueltos.pdf                                                | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main/TrabajosPracticos/GuiasEjercicios                                                   |
 | Guía de ejercicios evaluables        | ISW_Enunciados TP evaluables 2024 2doCuat.pdf                                               | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main/TrabajosPracticos/GuiasEjercicios                                                   |
-| Elaboración de Trabajos Prácticos    | TP-&lt;TipoTrabajo&gt;-&lt;TemaTrabajo&gt;&lt;-NombreMiembroOpcional&gt;-&lt;VN&gt;.docx    | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main/TrabajosPracticos/TrabajoPractico[N]/DocumentosAEntregar                            | 
+| Elaboración de Trabajos Prácticos    | TP-Grupo10-&lt;TipoTrabajo&gt;-&lt;TemaTrabajo&gt;-&lt;NombreMiembroOpcional&gt;-&lt;VN&gt;.docx    | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main/TrabajosPracticos/TrabajoPractico[N]/DocumentosAEntregar                            | 
 | Estructura de Equipo de Trabajo      | EstructuraEquipo.docx                                                                       | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main                                                                                     |
 | Glosario                             | Glosario.docx                                                                               | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main                                                                                     |
 | Indice de Minutas                    | IndiceMinutas.docx                                                                          | https://github.com/Salvita4/ISW-Grupo10-2024/tree/main                                                                                     |
