@@ -15,14 +15,14 @@ Repositorio dedicado a almacenar y gestionar todos los resultados de aprendizaje
 git clone https://github.com/Salvita4/ISW-Grupo10-2024.git
 cd ISW-Grupo10-2024
 
-*Siempre hacer pull o clonar el repo en una nueva carpeta*
+*Siempre hacer pull o clonar el repositorio en una nueva carpeta*
 
 ------> COMO PULLEAR UNA RAMA:
 git pull origin NombreRamaRemota NombreRamaLocal  --Pullea la rama remota en una rama local
 git checkout NombreRamaLocal --Me traslado a la rama local recien pulleada
 
 ------> CUANDO SE PULLEA UN TP PROGRAMABLE:
-- ejecturar en la terminal: npm insstall  --Instala todas las dependencias.
+- ejecutar en la terminal: npm install  --Instala todas las dependencias.
 ```
 
 ## Criterio/Linea/Base
@@ -158,7 +158,7 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
     |   |   └── DocumentosAEntregar/     +---------------------+
     |   |                                |   CADA CARPETA DE   |
     │   ├── TrabajoPractico2/            |   TP TENDRA         |
-    │   ├── TrabajoPractico3/            |   SOLO A AQEULLAS   |
+    │   ├── TrabajoPractico3/            |   SOLO A AQUELLAS   |
     │   ├── TrabajoPractico4/            |   QUE NECESITE      |
     │   ├── TrabajoPractico5/            +---------------------+
     │   ├── TrabajoPractico6/            *Se muestra un ejemplo*
@@ -196,7 +196,7 @@ A continuación se detalla la lista de integrantes del grupo. Los roles que dese
   - TrabajoPracticoConceptual1-CharlaTED: Carpeta que contendrá el desarrollo del Trabajo práctico coneptual1 - CharlaTED.
     - MaterialDeApoyo: Carpeta que contendrá todo el material que sirva de soporte para la realización del trabajo.
     - Produccioens: Carpeta que contendrá las salidas del desarrollo del trabajo.
-  - TrabajoPracticoConceptual1-PosterCientifico: Carpeta que contendrá el desarrollo del Trabajo práctico coneptual1 - PosterCientifico. Su estructura es igual a la mencionada anteriormente 👆.
+  - TrabajoPracticoConceptual1-PosterCientifico: Carpeta que contendrá el desarrollo del Trabajo práctico conceptual1 - PosterCientifico. Su estructura es igual a la mencionada anteriormente 👆.
 
 - TrabajosPracticos: Carpeta que contendrá los trabajos prácticos realizados durante el cursado de la materia. Contendrá tantas carpetas llamadas TrabajoPracticoX como trabajos prácticos sean elaborados, siendo X reemplazado por el número de trabajo práctico correspondiente. Internamente, cada trabajo práctico contendrá (No todos los trabajos tendrán las 3 carpetas, solo tendrán aquellas que necesiten):
   - DocumentosAEntregar: Carpeta que contendrá los documentos que conformen la entrega final del trabajo práctico, explicando lo correspondiente al trabajo que haga referencia.
